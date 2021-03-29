@@ -1,16 +1,22 @@
-.node {
-    width: 30px;
-    height: 30px;
-    outline: 1px solid rgb(175, 216, 248);
-    display: inline-block;
-  }
+  .node {
+  width: 26px;
+  height: 26px;
+  outline: 1px solid rgba(25, 120, 161, 0.349);
+  margin-top: -1px;
+  margin-right: 1px;
+  display: inline-block;
+}
   
   .node-finish {
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
     background-color: red;
   }
   
   .node-start {
     background-color: green;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
   }
   
   .node-visited {

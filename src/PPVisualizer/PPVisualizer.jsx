@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Node from './Node/Node'
 import {dijkstra, getShortestPath} from './algorithms/dijkstra'
-
+import NavigationBar from "./navbar.jsx";
 import './PPVisualizer.css';
 
 const START_NODE_ROW = 5;
@@ -11,8 +11,8 @@ const FINISH_NODE_COL = 35;
 
 
 export default class PPVisualizer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       grid: [],
       isMousePressed: false,
@@ -37,6 +37,12 @@ export default class PPVisualizer extends Component {
 
   HandleMouseUp(row, col) {
     this.setState({isMousePressed: false});
+  }
+
+  clearPath() {
+    this.setState({ grid: [] });
+    const grid = getInitialGrid();
+    this.setState({ grid });
   }
 
   animateDijkstra(visitedNodesInOrder, shortestPath) {
@@ -73,30 +79,15 @@ export default class PPVisualizer extends Component {
     const shortestPath = getShortestPath(finishNode);
     this.animateDijkstra(visitedNodesOrdered, shortestPath);
   }
-// К счастью пока работает, но стирает начало и конец
-/*
-  clearGrid() {
-    const newGrid = this.state.grid.slice();
-    for (let i = 0; i < newGrid.length; i++) {
-      for (let j = 0; j < newGrid[i].length; j++) {
-        if ((i != START_NODE_ROW && j != START_NODE_COL) || 
-        (i != FINISH_NODE_ROW && j != FINISH_NODE_COL)) {
-          const node = createNode(j, i);
-          newGrid[i][j] = node;
-          document.getElementById(`node-${i}-${j}`).className = 'node';
-        }
-      }
-    }
-    this.setState({grid: newGrid, isMousePressed: false});
-  }
-*/
+
   render() {
     const {grid, isMousePressed} = this.state;
     return (
-      <>
-        <button onClick={() => this.visualizeDijkstra()}>
-          Visualize Dijkstra's algorithm!
-        </button>
+      <div>
+        <NavigationBar
+          onVisiualizePressed={() => this.visualizeDijkstra()}
+          onClearPathPressed={() => this.clearPath()}
+        />
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
@@ -122,7 +113,7 @@ export default class PPVisualizer extends Component {
             );
           })}
         </div>
-      </>
+      </div>
     );
   }
 }
