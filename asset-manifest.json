@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pathplanning/static/css/main.06521022.chunk.css",
+    "main.js": "/pathplanning/static/js/main.5698639c.chunk.js",
+    "main.js.map": "/pathplanning/static/js/main.5698639c.chunk.js.map",
+    "runtime-main.js": "/pathplanning/static/js/runtime-main.3fa035c8.js",
+    "runtime-main.js.map": "/pathplanning/static/js/runtime-main.3fa035c8.js.map",
+    "static/js/2.b0a291ff.chunk.js": "/pathplanning/static/js/2.b0a291ff.chunk.js",
+    "static/js/2.b0a291ff.chunk.js.map": "/pathplanning/static/js/2.b0a291ff.chunk.js.map",
+    "index.html": "/pathplanning/index.html",
+    "precache-manifest.da08f9e861d5054ca90e9c2b9ca09ba3.js": "/pathplanning/precache-manifest.da08f9e861d5054ca90e9c2b9ca09ba3.js",
+    "service-worker.js": "/pathplanning/service-worker.js",
+    "static/css/main.06521022.chunk.css.map": "/pathplanning/static/css/main.06521022.chunk.css.map"
+  }
+}
