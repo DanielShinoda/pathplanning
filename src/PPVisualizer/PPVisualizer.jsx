@@ -4,7 +4,7 @@ import {dijkstra, getShortestPath} from './algorithms/dijkstra'
 
 import './PPVisualizer.css';
 
-const START_NODE_ROW = 10;
+const START_NODE_ROW = 5;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
@@ -94,9 +94,9 @@ export default class PPVisualizer extends Component {
     const {grid, isMousePressed} = this.state;
     return (
       <>
-        <buttone onClick={() => this.visualizeDijkstra()}>
+        <button onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's algorithm!
-        </buttone>
+        </button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
