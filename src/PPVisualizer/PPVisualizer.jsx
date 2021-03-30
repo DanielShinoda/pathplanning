@@ -4,7 +4,7 @@ import {dijkstra, getShortestPath} from './algorithms/dijkstra'
 import NavigationBar from "./navbar.jsx";
 import './PPVisualizer.css';
 
-const START_NODE_ROW = 5;
+const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
@@ -42,6 +42,13 @@ export default class PPVisualizer extends Component {
   clearPath() {
     this.setState({ grid: [] });
     const grid = getInitialGrid();
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[0].length; j++) {
+        if (((grid[i][j].row != START_NODE_ROW) || (grid[i][j].col != START_NODE_COL)) && (
+          (grid[i][j].row != FINISH_NODE_ROW) || (grid[i][j].col != FINISH_NODE_COL)
+        )) document.getElementById(`node-${grid[i][j].row}-${grid[i][j].col}`).className = 'node';
+      }
+    }
     this.setState({ grid });
   }
 
@@ -55,8 +62,9 @@ export default class PPVisualizer extends Component {
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-visited';
+        if (((node.row != START_NODE_ROW) || (node.col != START_NODE_COL)) && (
+          (node.row != FINISH_NODE_ROW) || (node.col != FINISH_NODE_COL)
+        )) document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-visited';
       }, 5 * i);
     }
   }
@@ -65,8 +73,9 @@ export default class PPVisualizer extends Component {
     for (let i = 0; i < shortestPath.length; i++) {
       setTimeout(() => {
         const node = shortestPath[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-shortest-path';
+        if (((node.row != START_NODE_ROW) || (node.col != START_NODE_COL)) && (
+          (node.row != FINISH_NODE_ROW) || (node.col != FINISH_NODE_COL)
+        )) document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-shortest-path';
       }, 50 * i);
     }
   }
@@ -88,6 +97,7 @@ export default class PPVisualizer extends Component {
           onVisiualizePressed={() => this.visualizeDijkstra()}
           onClearPathPressed={() => this.clearPath()}
         />
+
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
