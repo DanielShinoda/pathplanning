@@ -1,6 +1,22 @@
-# Getting Started with Create React App
+# Path Planning Visualizer Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Программный проект онлайн-визуализатор работы алгоритмов Дейкстры и А*.
+
+# Этап разработки.
+
+На данном этапе разрабатывается работа алгоритма А* и движения по диагонали.
+
+# Онлайн запуск проекта
+
+Сервер задеплоен при помощи github pages, поэтому сейчас достаточно перейти по ссылке https://danielshinoda.github.io/pathplanning/.
+
+# Запуск через localhost
+
+Клонируйте содержимое этого репозитория в нужную директорию при помощи Git bash'a. (В нужной директории Rightclick + Git Bash here)
+
+```bash
+git clone https://github.com/*account*/PathPlanningProject.git
+```
 
 ## Available Scripts
 
