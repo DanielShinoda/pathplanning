@@ -23,10 +23,10 @@ export default class NavigationBar extends Component {
 
   render() {
     const { fixed } = this.state;
-    const { onVisiualizePressed, onClearPathPressed } = this.props;
+    const { onVisualizeDPressed, onVisualizeAPressed, onClearPathPressed } = this.props;
     return (
       
-      <Menu fixed="top" inverted style={{ backgroundColor: "darkblue" }}>
+      <Menu fixed="top" inverted style={{ backgroundColor: "maroon" }}>
         <Container>
           <Menu.Item as="a" header>
             <Image
@@ -53,8 +53,11 @@ export default class NavigationBar extends Component {
               Clear Path
             </Button>
 
-            <Button color="white" onClick={() => onVisiualizePressed()}>
-              Visualize Algorithm
+            <Button color="white" onClick={() => onVisualizeDPressed()}>
+              Visualize Dijkstra
+            </Button>
+            <Button color="white" onClick={() => onVisualizeAPressed()}>
+              Visualize A*
             </Button>
           </Menu.Item>
         </Container>

@@ -3,6 +3,7 @@ import Node from './Node/Node'
 import {dijkstra, getShortestPath} from './algorithms/dijkstra'
 import NavigationBar from "./navbar.jsx";
 import './PPVisualizer.css';
+import {AStarSearch} from './algorithms/A*'
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -52,7 +53,7 @@ export default class PPVisualizer extends Component {
     this.setState({ grid });
   }
 
-  animateDijkstra(visitedNodesInOrder, shortestPath) {
+  animate(visitedNodesInOrder, shortestPath) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -81,12 +82,27 @@ export default class PPVisualizer extends Component {
   }
 
   visualizeDijkstra() {
+    /*
     const {grid} = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesOrdered = dijkstra(grid, startNode, finishNode);
+    const visitedNodesOrdered = dijkstra(grid, startNode, finishNode, 0);
     const shortestPath = getShortestPath(finishNode);
-    this.animateDijkstra(visitedNodesOrdered, shortestPath);
+    this.animate(visitedNodesOrdered, shortestPath);
+    */
+    const {grid} = this.state;
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesOrdered = AStarSearch(START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL, grid, 1);
+    const shortestPath = getShortestPath(finishNode);
+    this.animate(visitedNodesOrdered, shortestPath);
+  }
+
+  visualizeA() {
+    const {grid} = this.state;
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesOrdered = AStarSearch(START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL, grid, 0);
+    const shortestPath = getShortestPath(finishNode);
+    this.animate(visitedNodesOrdered, shortestPath);
   }
 
   render() {
@@ -94,8 +110,9 @@ export default class PPVisualizer extends Component {
     return (
       <div>
         <NavigationBar
-          onVisiualizePressed={() => this.visualizeDijkstra()}
+          onVisualizeDPressed={() => this.visualizeDijkstra()}
           onClearPathPressed={() => this.clearPath()}
+          onVisualizeAPressed={() => this.visualizeA()}
         />
 
         <div className="grid">
@@ -146,10 +163,14 @@ const createNode = (col, row) => {
     row,
     isStart: row === START_NODE_ROW && col === START_NODE_COL,
     isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
-    distance: Infinity,
+    g: Infinity,
+    h: 0,
+    f: 0,
     isVisited: false,
+    opened: false,
+    closed: false,
     isWall: false,
-    prevNode: null,
+    parent: null,
   };
 }
 
