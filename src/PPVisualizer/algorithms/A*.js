@@ -4,6 +4,7 @@ var Heuristic = require('./Heuristic')
 export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) {
 	const heuristic = Heuristic.manhattan;
 	const closed = [];
+	const opened = [];
 	let weight = 1;
 
 	var openList = new Heap(function(nodeA, nodeB) {
@@ -21,7 +22,15 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) 
 		node = openList.pop();
 		node.closed = true;
 		if (node.col === finishY && node.row === finishX) {
-			return closed;
+			const new_closed = [];
+			for (let i = 0; i < closed.length; ++i) {
+				if (closed[i].closed === true) {
+					new_closed.push(closed[i]);
+				} else {
+					opened.push(closed[i]);
+				}
+			}
+			return [new_closed, opened];
 		}
 
 		neighbors = getNeighbors(node, grid);
@@ -51,7 +60,7 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) 
 			}
 		}
 	}
-	return [];
+	return [[],[]];
 }
 
 	function getNeighbors(node, grid) {
