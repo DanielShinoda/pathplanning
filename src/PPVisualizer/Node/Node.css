@@ -88,7 +88,7 @@
   .node-opened {
     animation-name: openedAnimation;
     animation-duration: 1.5s;
-    animation-timing-function: ease-out;
+    animation-timing-function: linear;
     animation-delay: 0;
     animation-direction: alternate;
     animation-iteration-count: 1;
@@ -99,12 +99,12 @@
   @keyframes openedAnimation {
     0% {
       transform: scale(0.6);
-      background-color: rgb(162, 143, 245);
+      background-color: rgb(214, 208, 245);
     }
   
     50% {
       transform: scale(1.2);
-      background-color: rgba(86, 54, 190, 0.883);
+      background-color: rgba(179, 160, 245, 0.883);
     }
   
     100% {

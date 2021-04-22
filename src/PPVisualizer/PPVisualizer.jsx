@@ -108,7 +108,18 @@ export default class PPVisualizer extends Component {
   }
 
   visualizeDijkstra() {
-    const {grid} = this.state;
+    let grid = this.state.grid;
+    for (let i = 0; i < grid.length; ++i) {
+      for (let j = 0; j < grid[0].length; ++j) {
+        if ((grid[i][j].isWall || grid[i][j].isStart || grid[i][j].isFinish) === false) {
+          document.getElementById(`node-${i}-${j}`).className = 'node';
+        }
+        if (grid[i][j].isWall === false) {
+          let node = createNode(j, i);
+          grid[i][j] = node;
+        }
+      }
+    }
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const temp = AStarSearch(START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL, grid, 1);
     const visitedNodesOrdered = temp[0];
@@ -118,7 +129,19 @@ export default class PPVisualizer extends Component {
   }
 
   visualizeA() {
-    const {grid} = this.state;
+    let grid = this.state.grid;
+    for (let i = 0; i < grid.length; ++i) {
+      for (let j = 0; j < grid[0].length; ++j) {
+        if ((grid[i][j].isWall || grid[i][j].isStart || grid[i][j].isFinish) === false) {
+          document.getElementById(`node-${i}-${j}`).className = 'node';
+        }
+        if (grid[i][j].isWall === false) {
+          let node = createNode(j, i);
+          grid[i][j] = node;
+        }
+      }
+    }
+
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const temp = AStarSearch(START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL, grid, 0);
     const visitedNodesOrdered = temp[0];
