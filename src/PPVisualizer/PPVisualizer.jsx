@@ -68,6 +68,37 @@ export default class PPVisualizer extends Component {
     this.setState({ grid });
   }
 
+  clearWalls() {
+    let newGrid = this.state.grid;
+    for (let i = 0; i < newGrid.length; ++i) {
+      for (let j = 0; j < newGrid[0].length; ++j) {
+        if (newGrid[i][j].isWall) {
+          const node = newGrid[i][j];
+          const newNode = {
+            ...node,
+            isWall: false,
+          };
+          newGrid[i][j] = newNode;
+        }
+      }
+    }
+    this.setState({grid: newGrid});
+  }
+
+  generateMaze() {
+    let newGrid = this.state.grid;
+    for (let i = 0; i < newGrid.length; ++i) {
+      for (let j = 0; j < newGrid[0].length; ++j) {
+        if (newGrid[i][j].isStart === false && newGrid[i][j].isFinish === false) {
+          if (Math.random() < 0.3) {
+            newGrid[i][j].isWall = true;
+          }
+        }
+      }
+    }
+    this.setState({grid: newGrid});
+  }
+
   animate(visitedNodesInOrder, shortestPath, opened) {
     for (let i = 0; i <= visitedNodesInOrder.length + opened.length; i++) {
       if (i === visitedNodesInOrder.length + opened.length) {
@@ -156,8 +187,10 @@ export default class PPVisualizer extends Component {
       <div>
         <NavigationBar
           onVisualizeDPressed={() => this.visualizeDijkstra()}
-          onClearPathPressed={() => this.clearPath()}
+          onClearGridPressed={() => this.clearPath()}
+          onClearWallsPressed={() => this.clearWalls()}
           onVisualizeAPressed={() => this.visualizeA()}
+          onGenerateRandomMazePressed={() => this.generateMaze()}
         />
 
         <div className="grid">

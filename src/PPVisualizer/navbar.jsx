@@ -12,6 +12,7 @@ import {
   Segment
 } from "semantic-ui-react";
 
+
 export default class NavigationBar extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ export default class NavigationBar extends Component {
 
   render() {
     const { fixed } = this.state;
-    const { onVisualizeDPressed, onVisualizeAPressed, onClearPathPressed } = this.props;
+    const { onVisualizeDPressed, onVisualizeAPressed, onClearGridPressed, onClearWallsPressed, onGenerateRandomMazePressed } = this.props;
     return (
       
       <Menu fixed="top" inverted style={{ backgroundColor: "maroon" }}>
@@ -42,21 +43,34 @@ export default class NavigationBar extends Component {
               <Dropdown.Item>Allow diagonal</Dropdown.Item>
               <Dropdown.Item>Allow squeeze</Dropdown.Item>
               <Dropdown.Item>Cutcorners</Dropdown.Item>
-              <Dropdown.Item>Breakingties</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Menu.Item>
             <Button
-              color="white"
-              onClick={() => onClearPathPressed()}
+              color="black"
+              onClick={() => onClearGridPressed()}
             >
-              Clear Path
+              Clear Grid
             </Button>
 
-            <Button color="white" onClick={() => onVisualizeDPressed()}>
+            <Button
+              color="black"
+              onClick={() => onClearWallsPressed()}
+            >
+              Clear Walls
+            </Button>
+
+            <Button
+              color="black"
+              onClick={() => onGenerateRandomMazePressed()}
+            >
+              Random Maze
+            </Button>
+
+            <Button color="black" onClick={() => onVisualizeDPressed()}>
               Visualize Dijkstra
             </Button>
-            <Button color="white" onClick={() => onVisualizeAPressed()}>
+            <Button color="black" onClick={() => onVisualizeAPressed()}>
               Visualize A*
             </Button>
           </Menu.Item>
