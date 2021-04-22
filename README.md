@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Path Planning Visualizer Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Программный проект онлайн-визуализатор работы алгоритмов Дейкстры и А*.
 
-## Available Scripts
+# Онлайн запуск проекта
 
-In the project directory, you can run:
+Сервер задеплоен при помощи github pages, поэтому сейчас достаточно перейти по ссылке https://danielshinoda.github.io/pathplanning/.
 
-### `npm start`
+# Запуск через localhost
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Клонируйте содержимое этого репозитория в нужную директорию при помощи Git bash'a. (В нужной директории Rightclick + Git Bash here)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+git clone https://github.com/*account*/pathplanning.git
+```
 
-### `npm test`
+Чтобы запустить локально войдите в директорию проекта и пропишите
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm start
+```
 
-### `npm run build`
+В браузере откроется вкладка http://localhost:3000. Если вы измените содержимое проекта локально, то локальный сайт автоматически обновится, а так же можно будет увидеть ошибки компиляции в консоли, если таковые имеются.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Для запуска в режиме тестирования пропишите в bash команду
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm test
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Чтобы закоммитить обновления в ваш гитхаб репозиторий пропишите следующие команды в bash:
 
-### `npm run eject`
+```bash
+npm run deploy
+git add .
+git commit -m "First commit!"
+git push
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Интерфейс сайта
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+На сайте расположено поле размера 20х50 клеток, а так же начальная клетка(зелёный квадрат) и конечная клетка(красный квадрат).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![image](https://user-images.githubusercontent.com/57168013/115067012-bf6c4d00-9f09-11eb-9080-f90f478e49f7.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+В верхней часте сайта прикреплена панель навигации, в которой расположены кнопки Clear path(очищает все клетки кроме начальной и конечной) и Visualize Algorithm(запускает [алгоритм Дейкстры](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D1%8B)).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![image](https://user-images.githubusercontent.com/57168013/115067277-1c680300-9f0a-11eb-837c-a0af967fd9ba.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Присутствует так же кнопка Options, но она находится в разработке.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![image](https://user-images.githubusercontent.com/57168013/115067299-24c03e00-9f0a-11eb-93c8-81576f99d595.png)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Посещённые клетки окрашиваются в голубой цвет, кратчайший путь в жёлтый цвет, стены чёрного цвета.
 
-### Making a Progressive Web App
+![image](https://user-images.githubusercontent.com/57168013/115067341-34d81d80-9f0a-11eb-8439-6e84ef48e5e1.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Чтобы поставить стены нужно зажать ЛКМ и передвигать, на том месте, где была мышь, появятся стены, чтобы остановить установку стен отпустите ЛКМ.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![image](https://user-images.githubusercontent.com/57168013/115067448-5e914480-9f0a-11eb-802e-5abc6fe9bce6.png)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# В ближайшей разработке:
 
-### `npm run build` fails to minify
+# Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Алгоритм A*, движение по диагонали, опции движения.
+
+# Frontend
+
+Рабочие кнопки, изменение начальной и конечной точек, установка корректного отображения относительно разрешения экрана пользваотеля, настройка масштаба карты, описание интерфейса на сайте.
