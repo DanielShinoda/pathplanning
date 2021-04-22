@@ -44,12 +44,16 @@ git push
 ![image](https://user-images.githubusercontent.com/57168013/115067012-bf6c4d00-9f09-11eb-9080-f90f478e49f7.png)
 
 
-В верхней часте сайта прикреплена панель навигации, в которой расположены кнопки Clear grid(очищает все клетки кроме начальной и конечной), Visualize Dijkstra(запускает [алгоритм Дейкстры](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D1%8B)) и Visualize A*(запускает [алгоритм А*](https://ru.wikipedia.org/wiki/A*).
+В верхней часте сайта прикреплена панель навигации, в которой расположены кнопки Clear grid(очищает все клетки кроме начальной и конечной), Visualize Dijkstra(запускает [алгоритм Дейкстры](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D1%8B)) и Visualize A*(запускает [алгоритм А*](https://ru.wikipedia.org/wiki/A*)).
 
 ![image](https://user-images.githubusercontent.com/57168013/115067277-1c680300-9f0a-11eb-837c-a0af967fd9ba.png)
 
 
-Присутствует так же кнопка Options, но она находится в разработке.
+Присутствует так же кнопка Options, в которой можно выбрать опции поиска:
+
+- Allow diagonal - разрешить движение по диагонали.
+- Allow squeeze - разрешить просачиваться между двумя стенами.
+- Cutcorners - разрешить срезать углы, если есть стена
 
 ![image](https://user-images.githubusercontent.com/57168013/115067299-24c03e00-9f0a-11eb-93c8-81576f99d595.png)
 
