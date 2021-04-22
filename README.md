@@ -44,10 +44,14 @@ git push
 ![image](https://user-images.githubusercontent.com/57168013/115717643-ce348300-a393-11eb-9329-d9beedccc1b6.png)
 
 
-В верхней часте сайта прикреплена панель навигации, в которой расположены кнопки Clear grid(очищает все клетки кроме начальной и конечной), Visualize Dijkstra(запускает [алгоритм Дейкстры](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D1%8B)) и Visualize A*(запускает [алгоритм А*](https://ru.wikipedia.org/wiki/A*)).
+В верхней часте сайта прикреплена панель навигации, в которой расположены кнопки: 
+- Clear grid(очищает все клетки кроме начальной и конечной)
+- Visualize Dijkstra(запускает [алгоритм Дейкстры](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%94%D0%B5%D0%B9%D0%BA%D1%81%D1%82%D1%80%D1%8B))
+- Visualize A*(запускает [алгоритм А*](https://ru.wikipedia.org/wiki/A*))
+- Clear Walls - очищает все текущие стены
+- Generate Maze - генератор случайного лабиринта
 
-![image](https://user-images.githubusercontent.com/57168013/115717790-f623e680-a393-11eb-8f91-a3c64e6e16de.png)
-
+![image](https://user-images.githubusercontent.com/57168013/115729681-0f7e6000-a39f-11eb-9b0b-7a722a7ab968.png)
 
 
 Присутствует так же кнопка Options, в которой можно выбрать опции поиска:
