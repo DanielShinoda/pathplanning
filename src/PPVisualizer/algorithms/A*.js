@@ -60,7 +60,7 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) 
 			}
 		}
 	}
-	return [[],[]];
+	return [closed,[]];
 }
 
 	function getNeighbors(node, grid) {
