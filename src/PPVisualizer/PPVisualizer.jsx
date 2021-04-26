@@ -55,7 +55,7 @@ export default class PPVisualizer extends Component {
     this.setState({isMousePressed: false, isStartPressed: false, isFinishPressed: false});
   }
 
-  clearPath() {
+  clearGrid() {
     this.setState({ grid: [] });
     const grid = getInitialGrid();
     for (let i = 0; i < grid.length; i++) {
@@ -69,6 +69,7 @@ export default class PPVisualizer extends Component {
   }
 
   generateMaze() {
+    this.clearGrid();
     let newGrid = getInitialGrid();
     for (let i = 0; i < newGrid.length; ++i) {
       for (let j = 0; j < newGrid[0].length; ++j) {
@@ -170,7 +171,7 @@ export default class PPVisualizer extends Component {
       <div>
         <NavigationBar
           onVisualizeDPressed={() => this.visualizeDijkstra()}
-          onClearGridPressed={() => this.clearPath()}
+          onClearGridPressed={() => this.clearGrid()}
           onVisualizeAPressed={() => this.visualizeA()}
           onGenerateRandomMazePressed={() => this.generateMaze()}
         />

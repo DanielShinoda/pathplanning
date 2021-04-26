@@ -23,7 +23,7 @@ export default class NavigationBar extends Component {
 
   render() {
     const { fixed } = this.state;
-    const { onVisualizeDPressed, onVisualizeAPressed, onClearGridPressed, onClearWallsPressed, onGenerateRandomMazePressed } = this.props;
+    const { onVisualizeDPressed, onVisualizeAPressed, onClearGridPressed, onGenerateRandomMazePressed } = this.props;
     return (
       
       <Menu fixed="top" inverted style={{ backgroundColor: "#121212" }}>
