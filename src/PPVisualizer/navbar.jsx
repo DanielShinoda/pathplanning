@@ -12,7 +12,6 @@ import {
   Segment
 } from "semantic-ui-react";
 
-
 export default class NavigationBar extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +26,7 @@ export default class NavigationBar extends Component {
     const { onVisualizeDPressed, onVisualizeAPressed, onClearGridPressed, onClearWallsPressed, onGenerateRandomMazePressed } = this.props;
     return (
       
-      <Menu fixed="top" inverted style={{ backgroundColor: "maroon" }}>
+      <Menu fixed="top" inverted style={{ backgroundColor: "#121212" }}>
         <Container>
           <Menu.Item as="a" header>
             <Image
@@ -46,31 +45,23 @@ export default class NavigationBar extends Component {
             </Dropdown.Menu>
           </Dropdown>
           <Menu.Item>
-            <Button
-              color="black"
+            <Button color="blue"
               onClick={() => onClearGridPressed()}
             >
-              Clear Grid
+              Clear grid
             </Button>
 
             <Button
-              color="black"
-              onClick={() => onClearWallsPressed()}
-            >
-              Clear Walls
-            </Button>
-
-            <Button
-              color="black"
+              color="blue"
               onClick={() => onGenerateRandomMazePressed()}
             >
               Random Maze
             </Button>
 
-            <Button color="black" onClick={() => onVisualizeDPressed()}>
+            <Button color="blue" onClick={() => onVisualizeDPressed()}>
               Visualize Dijkstra
             </Button>
-            <Button color="black" onClick={() => onVisualizeAPressed()}>
+            <Button color="blue" onClick={() => onVisualizeAPressed()}>
               Visualize A*
             </Button>
           </Menu.Item>
