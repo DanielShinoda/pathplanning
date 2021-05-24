@@ -6,10 +6,10 @@ import './PPVisualizer.css';
 import {AStarSearch} from './algorithms/A*'
 import './navbar.css'
 
-let START_NODE_ROW = 5;
-let START_NODE_COL = window.screen.availWidth / 120;
-let FINISH_NODE_ROW = 5;
-let FINISH_NODE_COL = window.screen.availWidth / 60;
+let START_NODE_ROW = Math.floor(window.screen.availHeight / (52 * 3));
+let START_NODE_COL = Math.floor(window.screen.availHeight / (26 * 1.5));
+let FINISH_NODE_ROW = Math.floor(window.screen.availHeight / (52 * 3));
+let FINISH_NODE_COL = Math.floor(window.screen.availHeight / (26 * 4));
 
 
 export default class PPVisualizer extends Component {
@@ -245,9 +245,9 @@ export default class PPVisualizer extends Component {
 
 const getInitialGrid = () => {
   const grid = [];
-  for (let row = 0; row < window.screen.availHeight / 60; row++) {
+  for (let row = 0; row < Math.floor(window.screen.availHeight / 52); row++) {
     const curRow = [];
-    for (let col = 0; col < window.screen.availHeight / 20; col++) {
+    for (let col = 0; col < Math.floor(window.screen.availHeight / 26); col++) {
       curRow.push(createNode(col, row));
     }
     grid.push(curRow);
