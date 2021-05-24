@@ -66,10 +66,10 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra, 
 		let x = node.row,
 			y = node.col, 
 			neighbors = [],
-			s0 = 0, d0 = 0,
-        	s1 = 0, d1 = 0,
-        	s2 = 0, d2 = 0,
-        	s3 = 0, d3 = 0;
+			s0 = false, d0 = false,
+        	s1 = false, d1 = false,
+        	s2 = false, d2 = false,
+        	s3 = false, d3 = false;
 		
 		if (y > 0) {
 			if (grid[x][y - 1].isWall === false) {
@@ -110,21 +110,23 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra, 
         	d3 = s2 && s3;
 		}
 
-		if (Options.Allowdiagonal && Options.Cutcorners) {
+		if ((Options.Allowdiagonal === true) && (Options.Cutcorners === true)) {
 			d0 = s3 || s0;
         	d1 = s0 || s1;
         	d2 = s1 || s2;
         	d3 = s2 || s3;
 		}
 
-		if (Options.Allowdiagonal && Options.Cutcorners && Options.Allowsqueeze) {
+		if ((Options.Allowdiagonal === true) && 
+			(Options.Cutcorners === true) && 
+			(Options.Allowsqueeze === true)) {
 			d0 = true;
         	d1 = true;
         	d2 = true;
         	d3 = true;
 		}
 
-		if (Options.Allowdiagonal && Options.Allowsqueeze) {
+		if ((Options.Allowdiagonal === true) && (Options.Allowsqueeze === true)) {
 			d0 = true;
         	d1 = true;
         	d2 = true;
@@ -135,7 +137,7 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra, 
 			neighbors.push(grid[x - 1][y - 1]);
 		}
 
-		if (d1 && x > 0 && (y < grid[0].length - 1) && (grid[x - 1][y + 1].isWall === false)) {
+		if (d3 && x > 0 && (y < grid[0].length - 1) && (grid[x - 1][y + 1].isWall === false)) {
 			neighbors.push(grid[x - 1][y + 1]);
 		}
 
@@ -143,7 +145,7 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra, 
 			neighbors.push(grid[x + 1][y + 1]);
 		}
 
-		if (d3 && (x < grid.length - 1) && y > 0 && (grid[x + 1][y - 1].isWall === false)) {
+		if (d1 && (x < grid.length - 1) && y > 0 && (grid[x + 1][y - 1].isWall === false)) {
 			neighbors.push(grid[x + 1][y - 1]);
 		}
 
