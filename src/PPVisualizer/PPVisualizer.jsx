@@ -7,9 +7,9 @@ import {AStarSearch} from './algorithms/A*'
 import './navbar.css'
 
 let START_NODE_ROW = 5;
-let START_NODE_COL = 5;
-let FINISH_NODE_ROW = 15;
-let FINISH_NODE_COL = 35;
+let START_NODE_COL = window.screen.availWidth / 120;
+let FINISH_NODE_ROW = 5;
+let FINISH_NODE_COL = window.screen.availWidth / 60;
 
 
 export default class PPVisualizer extends Component {
@@ -245,7 +245,7 @@ export default class PPVisualizer extends Component {
 
 const getInitialGrid = () => {
   const grid = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < window.screen.availHeight / 60; row++) {
     const curRow = [];
     for (let col = 0; col < window.screen.availHeight / 20; col++) {
       curRow.push(createNode(col, row));
