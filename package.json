@@ -4,6 +4,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "multiselect-react-dropdown": "^1.6.11",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
         "react-scripts": "3.1.2",

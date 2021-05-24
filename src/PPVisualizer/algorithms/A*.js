@@ -1,7 +1,7 @@
 var Heap = require('heap');
 var Heuristic = require('./Heuristic')
 
-export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) {
+export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra, Options) {
 	const heuristic = Heuristic.manhattan;
 	const closed = [];
 	const opened = [];
@@ -11,7 +11,6 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) 
 		return nodeA.f - nodeB.f;
 		}),
 		startNode = grid[startX][startY],
-		finishNode = grid[finishX][finishY],
 		abs = Math.abs, SQRT2 = Math.SQRT2,
 		node, neighbors, x, y, ng;
 	startNode.g = 0;
@@ -33,7 +32,7 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) 
 			return [new_closed, opened];
 		}
 
-		neighbors = getNeighbors(node, grid);
+		neighbors = getNeighbors(node, grid, Options);
 		for (let i = 0, l = neighbors.length; i < l; ++i) {
 			
 			const neighbor = neighbors[i];
@@ -63,67 +62,90 @@ export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra) 
 	return [closed,[]];
 }
 
-	function getNeighbors(node, grid) {
+	function getNeighbors(node, grid, Options) {
 		let x = node.row,
 			y = node.col, 
 			neighbors = [],
-			s0 = false, d0 = false,
-        	s1 = false, d1 = false,
-        	s2 = false, d2 = false,
-        	s3 = false, d3 = false;
+			s0 = 0, d0 = 0,
+        	s1 = 0, d1 = 0,
+        	s2 = 0, d2 = 0,
+        	s3 = 0, d3 = 0;
 		
 		if (y > 0) {
 			if (grid[x][y - 1].isWall === false) {
 				neighbors.push(grid[x][y - 1]);
-				s0 = true;
+				s0 = 1;
 			}
 		}
 
 		if (x < grid.length - 1) {
 			if (grid[x + 1][y].isWall === false) {
 				neighbors.push(grid[x + 1][y]);
-				s1 = true;
+				s1 = 1;
 			}
 		}
 
 		if (y < grid[0].length - 1) {
 			if (grid[x][y + 1].isWall === false) {
 				neighbors.push(grid[x][y + 1]);
-				s2 = true;
+				s2 = 1;
 			}
 		}
 
 		if (x > 0) {
 			if (grid[x - 1][y].isWall === false) {
 				neighbors.push(grid[x - 1][y]);
-				s0 = true;
+				s3 = 1;
 			}
 		}
 
-		if (x > 0 && y > 0) {
-			if (grid[x - 1][y - 1].isWall === false) neighbors.push(grid[x - 1][y - 1]);
+		if (Options.Allowdiagonal === false) {
+			return neighbors
 		}
 
-		if (x > 0 && (y < grid[0].length - 1)) {
-			if (grid[x - 1][y + 1].isWall === false) neighbors.push(grid[x - 1][y + 1]);
+		if (Options.Allowdiagonal) {
+			d0 = s3 && s0;
+        	d1 = s0 && s1;
+        	d2 = s1 && s2;
+        	d3 = s2 && s3;
 		}
 
-		if ((x < grid.length - 1) && (y < grid[0].length - 1)) {
-			if (grid[x + 1][y + 1].isWall === false) neighbors.push(grid[x + 1][y + 1]);
+		if (Options.Allowdiagonal && Options.Cutcorners) {
+			d0 = s3 || s0;
+        	d1 = s0 || s1;
+        	d2 = s1 || s2;
+        	d3 = s2 || s3;
 		}
 
-		if ((x < grid.length - 1) && y > 0) {
-			if (grid[x + 1][y - 1].isWall === false) neighbors.push(grid[x + 1][y - 1]);
+		if (Options.Allowdiagonal && Options.Cutcorners && Options.Allowsqueeze) {
+			d0 = true;
+        	d1 = true;
+        	d2 = true;
+        	d3 = true;
+		}
+
+		if (Options.Allowdiagonal && Options.Allowsqueeze) {
+			d0 = true;
+        	d1 = true;
+        	d2 = true;
+        	d3 = true;
+		}
+		
+		if (d0 && x > 0 && y > 0 && (grid[x - 1][y - 1].isWall === false)) {
+			neighbors.push(grid[x - 1][y - 1]);
+		}
+
+		if (d1 && x > 0 && (y < grid[0].length - 1) && (grid[x - 1][y + 1].isWall === false)) {
+			neighbors.push(grid[x - 1][y + 1]);
+		}
+
+		if (d2 && (x < grid.length - 1) && (y < grid[0].length - 1) && (grid[x + 1][y + 1].isWall === false)) {
+			neighbors.push(grid[x + 1][y + 1]);
+		}
+
+		if (d3 && (x < grid.length - 1) && y > 0 && (grid[x + 1][y - 1].isWall === false)) {
+			neighbors.push(grid[x + 1][y - 1]);
 		}
 
 		return neighbors;
-	}
-
-	function backtrace(node) {
-		var Path = [node];
-		while (node.parent) {
-			node = node.parent;
-			Path.push(node);
-		}
-		return Path.reverse();
 	}

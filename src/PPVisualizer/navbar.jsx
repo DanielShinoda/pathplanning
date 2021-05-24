@@ -1,29 +1,25 @@
 import React, { Component } from "react";
 import {
   Container,
-  Divider,
   Dropdown,
-  Grid,
-  Header,
   Image,
-  List,
   Menu,
   Button,
-  Segment
 } from "semantic-ui-react";
+import './navbar.css'
+import './PPVisualizer.jsx'
+
 
 export default class NavigationBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {}
   }
 
-  hideFixedMenu = () => this.setState({ fixed: false });
-  showFixedMenu = () => this.setState({ fixed: true });
-
   render() {
-    const { fixed } = this.state;
-    const { onVisualizeDPressed, onVisualizeAPressed, onClearGridPressed, onGenerateRandomMazePressed } = this.props;
+    const { onVisualizeDPressed, onVisualizeAPressed, onClearGridPressed,
+       onGenerateRandomMazePressed } = this.props;
+
     return (
       
       <Menu fixed="top" inverted style={{ backgroundColor: "#121212" }}>
@@ -36,25 +32,14 @@ export default class NavigationBar extends Component {
             />
             Path Planning Visualizer
           </Menu.Item>
-
-          <Dropdown item simple text="Options">
-            <Dropdown.Menu>
-              <Dropdown.Item>Allow diagonal</Dropdown.Item>
-              <Dropdown.Item>Allow squeeze</Dropdown.Item>
-              <Dropdown.Item>Cutcorners</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
           <Menu.Item>
             <Button color="blue"
-              onClick={() => onClearGridPressed()}
-            >
+              onClick={() => onClearGridPressed()}>
               Clear grid
             </Button>
-
             <Button
               color="blue"
-              onClick={() => onGenerateRandomMazePressed()}
-            >
+              onClick={() => onGenerateRandomMazePressed()}>
               Random Maze
             </Button>
 

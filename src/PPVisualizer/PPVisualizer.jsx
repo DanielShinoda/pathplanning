@@ -4,11 +4,12 @@ import {dijkstra, getShortestPath} from './algorithms/dijkstra'
 import NavigationBar from "./navbar.jsx";
 import './PPVisualizer.css';
 import {AStarSearch} from './algorithms/A*'
+import './navbar.css'
 
 let START_NODE_ROW = 5;
 let START_NODE_COL = 5;
 let FINISH_NODE_ROW = 15;
-let FINISH_NODE_COL = 45;
+let FINISH_NODE_COL = 35;
 
 
 export default class PPVisualizer extends Component {
@@ -19,6 +20,11 @@ export default class PPVisualizer extends Component {
       isMousePressed: false,
       isStartPressed: false,
       isFinishPressed: false,
+      Options:{
+        Allowdiagonal:false,
+        Allowsqueeze:false,
+        Cutcorners:false
+      }
     };
   }
 
@@ -136,7 +142,13 @@ export default class PPVisualizer extends Component {
       }
     }
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const temp = AStarSearch(START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL, grid, 1);
+    const temp = AStarSearch(START_NODE_ROW,
+        START_NODE_COL,
+        FINISH_NODE_ROW,
+        FINISH_NODE_COL, 
+        grid, 
+        1, 
+        this.state.Options);
     const visitedNodesOrdered = temp[0];
     const opened = temp[1];
     const shortestPath = getShortestPath(finishNode);
@@ -158,12 +170,26 @@ export default class PPVisualizer extends Component {
     }
 
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const temp = AStarSearch(START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL, grid, 0);
+    const temp = AStarSearch(START_NODE_ROW, 
+      START_NODE_COL, 
+      FINISH_NODE_ROW, 
+      FINISH_NODE_COL, 
+      grid, 
+      0, 
+      this.state.Options);
     const visitedNodesOrdered = temp[0];
     const opened = temp[1];
     const shortestPath = getShortestPath(finishNode);
     this.animate(visitedNodesOrdered, shortestPath, opened);
   }
+
+  checkclick = (e) => {
+    var {name, checked} = e.target;
+    this.setState((e)=> {
+      var selectedOptions = e.Options;
+      return selectedOptions[name]=checked;
+    });
+  };
 
   render() {
     const {grid, isMousePressed} = this.state;
@@ -201,6 +227,17 @@ export default class PPVisualizer extends Component {
             );
           })}
         </div>
+        <div style={{position: 'absolute'}}>
+          <label class="container"> <input type="checkbox" name="Allowdiagonal" onChange={this.checkclick}/>
+          Allow diagonal
+          <span class="checkmark"></span> </label>
+          <label class="container"> <input type="checkbox" name="Cutcorners" onChange={this.checkclick}/>
+          Cutcorners
+          <span class="checkmark"></span></label>
+          <label class="container"> <input type="checkbox" name="Allowsqueeze" onChange={this.checkclick}/>
+          Allow squeeze
+          <span class="checkmark"></span> </label> 
+        </div>
       </div>
     );
   }
@@ -210,7 +247,7 @@ const getInitialGrid = () => {
   const grid = [];
   for (let row = 0; row < 20; row++) {
     const curRow = [];
-    for (let col = 0; col < 50; col++) {
+    for (let col = 0; col < window.screen.availHeight / 20; col++) {
       curRow.push(createNode(col, row));
     }
     grid.push(curRow);
