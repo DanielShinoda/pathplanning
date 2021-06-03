@@ -5,6 +5,7 @@ import NavigationBar from "./navbar.jsx";
 import './PPVisualizer.css';
 import {AStarSearch} from './algorithms/A*'
 import './navbar.css'
+import Heuristic from './algorithms/Heuristic';
 
 let START_NODE_ROW = Math.floor(window.screen.availHeight / (52 * 3));
 let START_NODE_COL = Math.floor(window.screen.availHeight / (26 * 1.5));
@@ -20,10 +21,11 @@ export default class PPVisualizer extends Component {
       isMousePressed: false,
       isStartPressed: false,
       isFinishPressed: false,
+      Heuristic: "0",
       Options:{
         Allowdiagonal:false,
         Allowsqueeze:false,
-        Cutcorners:false
+        Cutcorners:false,
       }
     };
   }
@@ -148,7 +150,8 @@ export default class PPVisualizer extends Component {
         FINISH_NODE_COL, 
         grid, 
         1, 
-        this.state.Options);
+        this.state.Options,
+        this.state.Heuristic);
     const visitedNodesOrdered = temp[0];
     const opened = temp[1];
     const shortestPath = getShortestPath(finishNode);
@@ -176,7 +179,8 @@ export default class PPVisualizer extends Component {
       FINISH_NODE_COL, 
       grid, 
       0, 
-      this.state.Options);
+      this.state.Options,
+      this.state.Heuristic);
     const visitedNodesOrdered = temp[0];
     const opened = temp[1];
     const shortestPath = getShortestPath(finishNode);
@@ -188,6 +192,13 @@ export default class PPVisualizer extends Component {
     this.setState((e)=> {
       var selectedOptions = e.Options;
       return selectedOptions[name]=checked;
+    });
+  };
+
+  onValueChange = (e) => {
+    var {value} = e.target;
+    this.setState((e)=> {
+      return e.Heuristic=value;
     });
   };
 
@@ -236,7 +247,17 @@ export default class PPVisualizer extends Component {
           <span class="checkmark"></span></label>
           <label class="container"> <input type="checkbox" name="Allowsqueeze" onChange={this.checkclick}/>
           Allow squeeze
-          <span class="checkmark"></span> </label> 
+          <span class="checkmark"></span> </label>
+
+          <label class="containerR"> <input type="radio" value="0" checked={this.state.Heuristic === "0"} onChange={this.onValueChange}/>
+          Manhattan heuristic
+          <span class="checkmarkR"></span> </label>
+          <label class="containerR"> <input type="radio" value="1" checked={this.state.Heuristic === "1"} onChange={this.onValueChange}/>
+          Euclidian heuristic
+          <span class="checkmarkR"></span></label>
+          <label class="containerR"> <input type="radio" value="2" checked={this.state.Heuristic === "2"} onChange={this.onValueChange}/>
+          Chebyshev heuristic
+          <span class="checkmarkR"></span> </label> 
         </div>
       </div>
     );

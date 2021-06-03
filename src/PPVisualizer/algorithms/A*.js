@@ -1,8 +1,11 @@
 var Heap = require('heap');
 var Heuristic = require('./Heuristic')
 
-export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra, Options) {
-	const heuristic = Heuristic.manhattan;
+export function AStarSearch(startX, startY, finishX, finishY, grid, isDijkstra, Options, H) {
+	var heuristic;
+	if (H === "0") heuristic = Heuristic.manhattan;
+	if (H === "1") heuristic = Heuristic.euclidian;
+	if (H === "2") heuristic = Heuristic.chebyshev;
 	const closed = [];
 	const opened = [];
 	let weight = 1;
